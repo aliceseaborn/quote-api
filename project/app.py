@@ -21,7 +21,7 @@ import json
 
 # Configure paths
 from pathlib import Path
-data_path = Path('profiles/')
+data_path = Path('Profiles/')
 
 # Import engine
 import QuoteEngine as QE
