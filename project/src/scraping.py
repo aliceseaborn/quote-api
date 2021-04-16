@@ -1,6 +1,5 @@
 # ------------------------- CONFIGURE ENVIRONMENT ------------------------- #
 
-# Libraries for scraping
 import requests
 from bs4 import BeautifulSoup
 from lxml import html
@@ -12,7 +11,6 @@ import ssl
 import ast
 import os
 
-# JSON Support
 import json
 
 
@@ -20,7 +18,6 @@ import json
 # Takes a stock ticker as input and returns the full HTTP request
 #   for the yahoo finance query. This is an intermediate function
 #   to streamline other processes.
-#
 
 def FormQuery(ticker):
     return "https://in.finance.yahoo.com/quote/{}?ltr=1".format(ticker)
@@ -28,20 +25,18 @@ def FormQuery(ticker):
 
 # ------------------------- READ HTML ------------------------- #
 # Uses a query and returns the prettified HTML for reading.
-#
 
 def ReadHTML(query):
     response = requests.get(query)
     soup = BeautifulSoup(response.text, 'lxml')
     print(soup.prettify())
-    
-    
+
+
 # ------------------------- PARSE HTML ------------------------- #
 # Uses an HTML tree and searches for specific tags which house the
 #   stock information. This function utilizes try-catch methods
 #   for error handling of each data element. Returns empty for the
 #   missing values. The final return is a python dictionary.
-#
 
 def ParseHTML(query):
     
@@ -166,7 +161,6 @@ def ParseHTML(query):
 # ------------------------- EXPORT JSON ------------------------- #
 # Takes the stock profile as a dictionary and exports the contents
 #   as a JSON file using the ticker as the file name.
-#
 
 def ExportJSON(profiles_path, profile, ticker):
     file = profiles_path / "{}.json".format(ticker)
@@ -177,7 +171,6 @@ def ExportJSON(profiles_path, profile, ticker):
 # ------------------------- IMPORT JSON ------------------------- #
 # Takes a stock ticker and finds the stock profile JSON before
 #   returning the contents of the profile as a dictionary.
-#
 
 def ImportJSON(profiles_path, ticker):
     file = profiles_path / "{}.json".format(ticker)
