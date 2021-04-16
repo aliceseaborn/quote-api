@@ -15,31 +15,34 @@ import json
 
 
 # ------------------------- FORM QUERY ------------------------- #
-# Takes a stock ticker as input and returns the full HTTP request
-#   for the yahoo finance query. This is an intermediate function
-#   to streamline other processes.
 
-def FormQuery(ticker):
+def form_query(ticker):
+    """
+    Takes a stock ticker as input and returns the full HTTP request
+    for the yahoo finance query.
+    """
     return "https://in.finance.yahoo.com/quote/{}?ltr=1".format(ticker)
 
 
 # ------------------------- READ HTML ------------------------- #
-# Uses a query and returns the prettified HTML for reading.
 
-def ReadHTML(query):
+def read_html(query):
+    """
+    Uses a query and returns the prettified HTML for reading.
+    """
     response = requests.get(query)
     soup = BeautifulSoup(response.text, 'lxml')
     print(soup.prettify())
 
 
-# ------------------------- PARSE HTML ------------------------- #
-# Uses an HTML tree and searches for specific tags which house the
-#   stock information. This function utilizes try-catch methods
-#   for error handling of each data element. Returns empty for the
-#   missing values. The final return is a python dictionary.
+# ----------------------- REQUEST WEBPAGE ---------------------- #
 
-def ParseHTML(query):
-    
+def request_webpage(query):
+    """
+    Sends request against Yahoo Finance API using the provided
+    query. Returns the raw webpage bytes.
+    """
+
     # For ignoring SSL certificate errors
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
@@ -48,6 +51,19 @@ def ParseHTML(query):
     # Making the website believe that you are accessing it using a Mozilla browser
     req = Request(query, headers={'User-Agent': 'Mozilla/5.0'})
     webpage = urlopen(req).read()
+
+    return webpage
+
+
+# ------------------------ PARSE WEBPAGE ------------------------ #
+
+def parse_webpage(webpage):
+    """
+    Uses an HTML tree and searches for specific tags which house the
+    stock information. This function utilizes try-catch methods
+    for error handling of each data element. Returns empty for the
+    missing values. The final return is a python dictionary.
+    """
 
     # Creating a BeautifulSoup object of the HTML page for easy extraction of data.
     soup = BeautifulSoup(webpage, 'html.parser')
@@ -158,21 +174,23 @@ def ParseHTML(query):
     return profile
 
 
-# ------------------------- EXPORT JSON ------------------------- #
-# Takes the stock profile as a dictionary and exports the contents
-#   as a JSON file using the ticker as the file name.
+# ----------------------- EXPORT PROFILE ----------------------- #
 
-def ExportJSON(profiles_path, profile, ticker):
+def export_profile(profiles_path, profile, ticker):
+    """
+    Exports a stock profile into the profiles folder as JSON.
+    """
     file = profiles_path / "{}.json".format(ticker)
     with file.open("w") as fp:
         json.dump(profile, fp)
 
 
-# ------------------------- IMPORT JSON ------------------------- #
-# Takes a stock ticker and finds the stock profile JSON before
-#   returning the contents of the profile as a dictionary.
+# ----------------------- IMPORT PROFILE ----------------------- #
 
-def ImportJSON(profiles_path, ticker):
+def import_profile(profiles_path, ticker):
+    """
+    Imports a stock profile from the profiles folder.
+    """
     file = profiles_path / "{}.json".format(ticker)
     raw = open(file).read()
     return json.loads(raw)

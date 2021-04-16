@@ -22,92 +22,93 @@ profiles_path = Path('profiles/')
 from src.scraping import *
 
 
-# ------------------------- FLASK API ------------------------- #
+# ------------------------------- FLASK API ------------------------------- #
 
 app = flask.Flask(__name__);
 app.config["DEBUG"] = True;
 
 @app.route('/', methods=['GET'])
-def Home():
+def home():
     return render_template('home.html')
 
 @app.route('/docs', methods=['GET'])
-def Docs():
+def docs():
     return render_template('docs.html')
 
 
-# ------------------------- CREATE PROFILE ------------------------- #
-# Scrapes the information from finance.yahoo and updates the JSON
-#   stock profile or creates the profile if it did not already exist
-#   in the database.
+# ---------------------------------- V0.0 ---------------------------------- #
 
-# ---------- BETA V0.0 ---------- #
 @app.route('/api/v0.0/create', methods=['GET'], defaults={'ticker': "AAPL"})
-def CreateProfile( ticker = "AAPL" ):
+def create( ticker = "AAPL" ):
+    """
+    Scrapes the information from finance.yahoo and updates the JSON
+    stock profile or creates the profile if it did not already exist
+    in the database.
+    """
 
     # Pass ticker arg locally
     if 'ticker' in request.args:
         ticker = request.args['ticker']
 
     # Form finance.yahoo query
-    query = FormQuery(ticker)
+    query = form_query(ticker)
 
     # Call for profile
-    profile = ParseHTML(query)
+    webpage = request_webpage(query)
+    profile = parse_webpage(webpage)
 
     # Export profile as JSON
-    ExportJSON(profiles_path, profile, ticker)
+    export_profile(profiles_path, profile, ticker)
 
     # # Return query results
     return jsonify(profile)
 
 
-# ------------------------- UPDATE PROFILE ------------------------- #
-# Creating and updating a profile are ultimately the same function as
-#   they both overwrite the existing profile or create it if it does
-#   not exist. For this reason, update calls just function-forward to
-#   the create call.
-
-# ---------- BETA V0.0 ---------- #
 @app.route('/api/v0.0/update', methods=['GET'], defaults={'ticker': "AAPL"})
-def UpdateProfile(ticker):
+def update(ticker):
+    """
+    Creating and updating a profile are ultimately the same function as
+    they both overwrite the existing profile or create it if it does
+    not exist. For this reason, update calls just function-forward to
+    the create call.
+    """
 
     # Pass ticker arg locally
     if 'ticker' in request.args:
         ticker = request.args['ticker']
 
     # Form finance.yahoo query
-    query = FormQuery(ticker)
+    query = form_query(ticker)
 
     # Call for profile
-    profile = ParseHTML(query)
+    webpage = request_webpage(query)
+    profile = parse_webpage(webpage)
 
     # Export profile as JSON
-    ExportJSON(profiles_path, profile, ticker)
+    export_profile(profiles_path, profile, ticker)
 
     # # Return query results
     return "{} Profile Updated Successfully.".format(ticker)
 
 
-# ------------------------- GET PROFILE ------------------------- #
-# This function finds the profile within the database and loads the
-#   function as a JSON. In verbose mode, this function will also
-#   return the dictionary version of the JSON file. In normal mode
-#   it returns the JSON string itself, assuming an API application.
-
-# ---------- BETA V0.0 ---------- #
 @app.route('/api/v0.0/get', methods=['GET'], defaults={'ticker': "AAPL"})
-def GetProfile(ticker):
+def get(ticker):
+    """
+    This function finds the profile within the database and loads the
+    function as a JSON. In verbose mode, this function will also
+    return the dictionary version of the JSON file. In normal mode
+    it returns the JSON string itself, assuming an API application.
+    """
+
     # Pass ticker arg locally
     if 'ticker' in request.args:
         ticker = request.args['ticker']
 
     # Get stock profile
-    return ImportJSON(profiles_path, ticker)
+    return import_profile(profiles_path, ticker)
 
 
-# ------------------------- MAIN ------------------------- #
-# Activates the API at init.
+# ---------------------------------- MAIN ---------------------------------- #
 
 if __name__ == '__main__':
     app.run()
