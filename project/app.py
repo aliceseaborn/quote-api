@@ -21,10 +21,10 @@ import json
 
 # Configure paths
 from pathlib import Path
-data_path = Path('Profiles/')
+data_path = Path('profiles/')
 
 # Import engine
-import QuoteEngine as QE
+from src.scraping import *
 
 
 # ------------------------- CREATE FLASK API ------------------------- #
@@ -58,13 +58,13 @@ def CreateProfile( ticker = "AAPL" ):
         ticker = request.args['ticker']
     
     # Form finance.yahoo query
-    query = QE.FormQuery(ticker)
+    query = FormQuery(ticker)
 
     # Call for profile
-    profile = QE.ParseHTML(query)
+    profile = ParseHTML(query)
 
     # Export profile as JSON
-    QE.ExportJSON(profile, ticker)
+    ExportJSON(profile, ticker)
     
     # Return query results
     return jsonify(profile)
@@ -100,4 +100,3 @@ def CreateProfile( ticker = "AAPL" ):
 
 if __name__ == '__main__':
     app.run()
-
