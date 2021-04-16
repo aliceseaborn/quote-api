@@ -21,13 +21,13 @@ import json
 
 # Configure paths
 from pathlib import Path
-data_path = Path('profiles/')
+profiles_path = Path('profiles/')
 
-# Import engine
+# Import scraping tools
 from src.scraping import *
 
 
-# ------------------------- CREATE FLASK API ------------------------- #
+# ------------------------- FLASK API ------------------------- #
 
 # Instantiate the app
 app = flask.Flask(__name__);
@@ -43,20 +43,22 @@ def Home():
 def Docs():
     return render_template('EngineDocumentation.html')
 
+
+
 # ------------------------- CREATE PROFILE ------------------------- #
 # Scrapes the information from finance.yahoo and updates the JSON
 #   stock profile or creates the profile if it did not already exist
 #   in the database.
 #
 
-# ---------- BETA V0 API ---------- #
-@app.route('/api/versions/beta-v0', methods=['GET'], defaults={'ticker': "AAPL"})
+# ---------- BETA V0.0 ---------- #
+@app.route('/api/v0.0/create', methods=['GET'], defaults={'ticker': "AAPL"})
 def CreateProfile( ticker = "AAPL" ):
-    
+
     # Pass ticker arg locally
     if 'ticker' in request.args:
         ticker = request.args['ticker']
-    
+
     # Form finance.yahoo query
     query = FormQuery(ticker)
 
@@ -64,33 +66,58 @@ def CreateProfile( ticker = "AAPL" ):
     profile = ParseHTML(query)
 
     # Export profile as JSON
-    ExportJSON(profile, ticker)
-    
-    # Return query results
+    ExportJSON(profiles_path, profile, ticker)
+
+    # # Return query results
     return jsonify(profile)
 
 
-# # ------------------------- UPDATE PROFILE ------------------------- #
-# # Creating and updating a profile are ultimately the same function as
-# #   they both overwrite the existing profile or create it if it does
-# #   not exist. For this reason, update calls just function-forward to
-# #   the create call.
-# #
 
-# def UpdateProfile(ticker):
-#     CreateProfile(ticker)
-    
-    
-# # ------------------------- GET PROFILE ------------------------- #
-# # This function finds the profile within the database and loads the
-# #   function as a JSON. In verbose mode, this function will also
-# #   return the dictionary version of the JSON file. In normal mode
-# #   it returns the JSON string itself, assuming an API application.
-# #
+# ------------------------- UPDATE PROFILE ------------------------- #
+# Creating and updating a profile are ultimately the same function as
+#   they both overwrite the existing profile or create it if it does
+#   not exist. For this reason, update calls just function-forward to
+#   the create call.
+#
 
-# def GetProfile(ticker):
-#     return ImportJSON(ticker)
+# ---------- BETA V0.0 ---------- #
+@app.route('/api/v0.0/update', methods=['GET'], defaults={'ticker': "AAPL"})
+def UpdateProfile(ticker):
 
+    # Pass ticker arg locally
+    if 'ticker' in request.args:
+        ticker = request.args['ticker']
+
+    # Form finance.yahoo query
+    query = FormQuery(ticker)
+
+    # Call for profile
+    profile = ParseHTML(query)
+
+    # Export profile as JSON
+    ExportJSON(profiles_path, profile, ticker)
+
+    # # Return query results
+    return "{} Profile Updated Successfully.".format(ticker)
+
+
+
+# ------------------------- GET PROFILE ------------------------- #
+# This function finds the profile within the database and loads the
+#   function as a JSON. In verbose mode, this function will also
+#   return the dictionary version of the JSON file. In normal mode
+#   it returns the JSON string itself, assuming an API application.
+#
+
+# ---------- BETA V0.0 ---------- #
+@app.route('/api/v0.0/get', methods=['GET'], defaults={'ticker': "AAPL"})
+def GetProfile(ticker):
+    # Pass ticker arg locally
+    if 'ticker' in request.args:
+        ticker = request.args['ticker']
+
+    # Get stock profile
+    return ImportJSON(profiles_path, ticker)
 
 
 

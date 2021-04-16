@@ -15,10 +15,6 @@ import os
 # JSON Support
 import json
 
-# Configure paths
-from pathlib import Path
-data_path = Path('profiles/')
-
 
 # ------------------------- FORM QUERY ------------------------- #
 # Takes a stock ticker as input and returns the full HTTP request
@@ -172,9 +168,9 @@ def ParseHTML(query):
 #   as a JSON file using the ticker as the file name.
 #
 
-def ExportJSON(profile, ticker):
-    data_file = data_path / "{}.json".format(ticker)
-    with data_file.open("w") as fp:
+def ExportJSON(profiles_path, profile, ticker):
+    file = profiles_path / "{}.json".format(ticker)
+    with file.open("w") as fp:
         json.dump(profile, fp)
 
 
@@ -183,7 +179,7 @@ def ExportJSON(profile, ticker):
 #   returning the contents of the profile as a dictionary.
 #
 
-def ImportJSON(ticker):
-    data_file = data_path / "{}.json".format(ticker)
-    data_str = open(data_file).read()
-    return json.loads(data_str)
+def ImportJSON(profiles_path, ticker):
+    file = profiles_path / "{}.json".format(ticker)
+    raw = open(file).read()
+    return json.loads(raw)
