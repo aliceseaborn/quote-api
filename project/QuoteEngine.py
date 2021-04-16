@@ -187,6 +187,3 @@ def ImportJSON(ticker):
     data_file = data_path / "{}.json".format(ticker)
     data_str = open(data_file).read()
     return json.loads(data_str)
-
-
-
