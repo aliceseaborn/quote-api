@@ -9,4 +9,4 @@
 */*/*.pyc
 
 # Cached stock profiles
-project/Profiles/*
+project/profiles/*
