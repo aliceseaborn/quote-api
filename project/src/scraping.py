@@ -17,7 +17,7 @@ import json
 
 # Configure paths
 from pathlib import Path
-data_path = Path('Profiles/')
+data_path = Path('profiles/')
 
 
 # ------------------------- FORM QUERY ------------------------- #
