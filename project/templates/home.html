@@ -1,0 +1,112 @@
+<!––	QUOTE API HOMEPAGE
+		Designer:	Austin Dial
+    Date:			10/08/2019
+-->
+
+<!DOCTYPE html>
+
+<title>Quote API</title>
+
+<html>
+
+<head>
+  <style>
+  	a:link {
+  		color				:	black;
+  		background-color	:	transparent;
+  		text-decoration		:	underline; }
+
+    a:hover {
+  		color				:	black;
+  		background-color	:	yellow;
+  		text-decoration		:	underline; }
+
+    a:visited {
+  		color				:	black;
+  		background-color	:	transparent;
+  		text-decoration		:	underline; }
+
+	h3 {
+    	margin-left			:	5%; }
+
+	p {
+    	margin-left			:	5%;
+        margin-right		:	10%; }
+
+	ul {
+    	padding-left		:	15%;
+        list-style-type		:	bullet;
+        display				:	inline-block; }
+
+    code {
+    	background-color	: 	#EEE;
+        font-weight			:	bold; }
+
+    pre code {
+		background-color	:	#EEE;
+		border				:	1px solid #999;
+		display				:	block;
+		padding				:	20px; }
+
+  </style>
+</head>
+
+<body>
+
+    <h1 style="background-color:#1063AE; color:#FFFFFF; text-align:center;", id="home">Quote API</h1>
+    <hr>
+
+    <h2 id="TOC"><a href="#home">Table of Contents</a></h2>
+    <ol>
+    	<li><a href="#introduction">Introduction</a></li>
+        <li><a href="#tutorial">Tutorial</a></li>
+        <ol>
+        	<li><a href="#starting">Starting the API</a></li>
+            <li><a href="#endpoints">Calling Endpoints</a></li>
+        </ol>
+        <li><a href="#version">Version History</a></li>
+        <ol>
+        	<li><a href="#BetaV0">Beta V0</a></li>
+					<li><a href="#BetaV1">Beta V1 (upcoming)</a></li>
+        </ol>
+    </ol>
+
+
+    <h2 id="introduction"><a href="#home">Introduction</a></h2>
+
+    <p>This API was developed to supplement a developers financial analysis interests. Financial data used to be provided by the major search engines for free through APIs and libraries which were well respected and maintained. After a while, however, these tools were deprecated and could no longer support the needs of financially savvy developers. This API, which relies on screen scraping, provides a method of obtaining information which is already publically available and which used to be provided for free. There is no indication that the information available on Yahoo is protected under copyright and I provide this API with strictly academic and educational intentions. I do not assume liability for the use and/or abuse of this API or its contents.</p>
+
+    <p>To read the development documentation for this API, please visit <code><a href="http://austindial.pythonanywhere.com/docs">http://austindial.pythonanywhere.com/docs</a></code>.</p>
+
+    <h2 id="tutorial"><a href="#home">Tutorial</a></h2>
+
+    <p>Within this section I will describe how to run and interact with the Quote API.</p>
+
+    <h3 id="starting"><a href="#home">Starting the API</a></h3>
+
+    <p>Typically, this API would be run on a local environment through Anaconda Python. However, this version is hosted on PythonAnywhere. By conencting to <code><a href="http://austindial.pythonanywhere.com/">http://austindial.pythonanywhere.com/</a></code>, you will access this page with the usage tutorial.</p>
+
+		<h3 id="endpoints"><a href="#home">Calling Endpoints</a></h3>
+
+		<p>End points are added to the primary URL of the API to instruct the system to perform a given task. In this case, add an endpoint to the following URL <code>http://austindial.pythonanywhere.com/...</code>. For example, to get the quote for Apple Inc. you could call <code><a href="http://austindial.pythonanywhere.com/api/v0.0/get?ticker=AAPL">http://austindial.pythonanywhere.com/api/v0.0/get?ticker=AAPL</a></code>.</p>
+
+		<p><code>.../api/v0.0/create?ticker=TICKER</code> This endpoint will instruct the API to connect to Yahoo Finance and create or update the quote information for the included ticker symbol.</p>
+		<p><code>.../api/v0.0/get?ticker=TICKER</code> By calling the get endpoint, the API will return the most recent quote for the given ticker symbol. This is useful for running the API locally when markets are closed.</p>
+		<p><code>.../api/v0.0/update?ticker=TICKER</code> If the goal of the API call is to update the database without receiving a quote, this update endpoint can be called. This will update the quote on record for the given ticker without returning the quote to the user. When updating multiple tickers at speed, this endpoint is more efficient than create.</p>
+
+		<h2 id="version"><a href="#home">Version History</a></h2>
+
+    <p>This API is new, experimental, and is designed mostly to provide a number of key metrics for the development of long term portfolios. The time series, for instance, is not an available from this API yet but could be through a number of extensions of the software. This would allow for a more quantitative analysis of equities.</p>
+
+    <h3 id="BetaV0"><a href="#home">Beta V0</a></h3>
+
+    <p>This is the first beta version of the API. It has a single endpoint with a single argument. This endpoint provides basic stock metrics and quotes given the ticker supplied by the user.</p>
+
+		<h3 id="BetaV1"><a href="#home">Beta V1 (upcoming)</a></h3>
+
+    <p>The next update will hopefully include a second end-point with the ability to call the timeseries of the equity in question. The issue at hand is the sheer volume of information required to pass a time-series through JSON. I will need to research what optimizations can be used to keep the API responsive.</p>
+
+		<h7><i>Written by Austin Dial, 10/08/2019. Updated 12/10/2019.</i></h7>
+
+</body>
+</html>
