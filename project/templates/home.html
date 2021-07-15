@@ -1,6 +1,6 @@
 <!––	QUOTE API HOMEPAGE
-		Designer:	Austin Dial
-    Date:			10/08/2019
+		Designer:	Alice Seaborn
+        Date:		2021.
 -->
 
 <!DOCTYPE html>
@@ -76,7 +76,7 @@
 
     <p>This API was developed to supplement a developers financial analysis interests. Financial data used to be provided by the major search engines for free through APIs and libraries which were well respected and maintained. After a while, however, these tools were deprecated and could no longer support the needs of financially savvy developers. This API, which relies on screen scraping, provides a method of obtaining information which is already publically available and which used to be provided for free. There is no indication that the information available on Yahoo is protected under copyright and I provide this API with strictly academic and educational intentions. I do not assume liability for the use and/or abuse of this API or its contents.</p>
 
-    <p>To read the development documentation for this API, please visit <code><a href="http://austindial.pythonanywhere.com/docs">http://austindial.pythonanywhere.com/docs</a></code>.</p>
+    <p>To read the development documentation for this API, please visit <code><a href="http://aliceseaborn.pythonanywhere.com/docs">http://aliceseaborn.pythonanywhere.com/docs</a></code>.</p>
 
     <h2 id="tutorial"><a href="#home">Tutorial</a></h2>
 
@@ -84,11 +84,11 @@
 
     <h3 id="starting"><a href="#home">Starting the API</a></h3>
 
-    <p>Typically, this API would be run on a local environment through Anaconda Python. However, this version is hosted on PythonAnywhere. By conencting to <code><a href="http://austindial.pythonanywhere.com/">http://austindial.pythonanywhere.com/</a></code>, you will access this page with the usage tutorial.</p>
+    <p>Typically, this API would be run on a local environment through Anaconda Python. However, this version is hosted on PythonAnywhere. By conencting to <code><a href="http://aliceseaborn.pythonanywhere.com">http://aliceseaborn.pythonanywhere.com/</a></code>, you will access this page with the usage tutorial.</p>
 
 		<h3 id="endpoints"><a href="#home">Calling Endpoints</a></h3>
 
-		<p>End points are added to the primary URL of the API to instruct the system to perform a given task. In this case, add an endpoint to the following URL <code>http://austindial.pythonanywhere.com/...</code>. For example, to get the quote for Apple Inc. you could call <code><a href="http://austindial.pythonanywhere.com/api/v0.0/get?ticker=AAPL">http://austindial.pythonanywhere.com/api/v0.0/get?ticker=AAPL</a></code>.</p>
+		<p>End points are added to the primary URL of the API to instruct the system to perform a given task. In this case, add an endpoint to the following URL <code>http://aliceseaborn.pythonanywhere.com/...</code>. For example, to get the quote for Apple Inc. you could call <code><a href="http://aliceseaborn.pythonanywhere.com/api/v0.0/get?ticker=AAPL">http://aliceseaborn.pythonanywhere.com/api/v0.0/get?ticker=AAPL</a></code>.</p>
 
 		<p><code>.../api/v0.0/create?ticker=TICKER</code> This endpoint will instruct the API to connect to Yahoo Finance and create or update the quote information for the included ticker symbol.</p>
 		<p><code>.../api/v0.0/get?ticker=TICKER</code> By calling the get endpoint, the API will return the most recent quote for the given ticker symbol. This is useful for running the API locally when markets are closed.</p>
@@ -106,7 +106,7 @@
 
     <p>The next update will hopefully include a second end-point with the ability to call the timeseries of the equity in question. The issue at hand is the sheer volume of information required to pass a time-series through JSON. I will need to research what optimizations can be used to keep the API responsive.</p>
 
-		<h7><i>Written by Austin Dial, 10/08/2019. Updated 12/10/2019.</i></h7>
+		<h7><i>Originally written by Seaborn, October 2019. Updated June 2021.</i></h7>
 
 </body>
 </html>
