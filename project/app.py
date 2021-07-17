@@ -3,6 +3,13 @@
 import flask
 from flask import request, jsonify, render_template, send_from_directory
 
+from flask_flatpages import FlatPages, pygments_style_defs
+
+DEBUG = True
+FLATPAGES_AUTO_RELOAD = DEBUG
+FLATPAGES_EXTENSION = ".md"
+FLATPAGES_MARKDOWN_EXTENSIONS = ['codehilite', 'tables', 'markdown_katex', 'footnotes']
+
 import requests
 from bs4 import BeautifulSoup
 from lxml import html
@@ -25,20 +32,30 @@ from src.scraping import *
 # ------------------------------- FLASK API ------------------------------- #
 
 app = flask.Flask(__name__);
-app.config["DEBUG"] = True;
+app.config.from_object(__name__)
+pages = FlatPages(app)
 
 @app.route('/', methods=['GET'])
-def home():
-    return render_template('home.html')
+def index():
+    return render_template('index.html')
 
-@app.route('/docs', methods=['GET'])
+@app.route('/docs')
 def docs():
-    return render_template('docs.html')
+    return render_template('docs.html', pages=pages)
+
+@app.route('/<path:path>')
+def page(path):
+    page = pages.get_or_404(path)
+    return render_template('page.html', page=page)
+
+@app.route('/pygments.css')
+def pygments_css():
+    return pygments_style_defs('tango'), 200, {'Content-Type': 'text/css'}
 
 
 # ---------------------------------- V0.0 ---------------------------------- #
 
-@app.route('/api/v0.0/create', methods=['GET'], defaults={'ticker': "AAPL"})
+@app.route('/api/0/create', methods=['GET'], defaults={'ticker': "AAPL"})
 def create( ticker = "AAPL" ):
     """
     Scrapes the information from finance.yahoo and updates the JSON
@@ -64,7 +81,7 @@ def create( ticker = "AAPL" ):
     return jsonify(profile)
 
 
-@app.route('/api/v0.0/update', methods=['GET'], defaults={'ticker': "AAPL"})
+@app.route('/api/0/update', methods=['GET'], defaults={'ticker': "AAPL"})
 def update(ticker):
     """
     Creating and updating a profile are ultimately the same function as
@@ -91,7 +108,7 @@ def update(ticker):
     return "{} Profile Updated Successfully.".format(ticker)
 
 
-@app.route('/api/v0.0/get', methods=['GET'], defaults={'ticker': "AAPL"})
+@app.route('/api/0/get', methods=['GET'], defaults={'ticker': "AAPL"})
 def get(ticker):
     """
     This function finds the profile within the database and loads the
