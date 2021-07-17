@@ -1,0 +1,16 @@
+{# PAGE #}
+
+{% extends "base.html" %}
+{% block content %}
+
+<!--- CONTENT --->
+<div class="jumbotron" style="padding-top: 1rem;">
+
+  <h3> {{ page.title }} </h3>
+  <small> Published by {{ page.author }} on {{ page.date.strftime('%A, %d %B, %Y') }} </small>
+  <br>
+  {{ page.html|safe }}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{# BASE #}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Quote API</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/master.css') }}">
+
+  <!--- Bootstrap CDN CSS Only --->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!--- Bootstrap CDN JS --->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+  <!--- Bootstrap CDN Popper.js --->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+  <!--- Bootstrap CDN JQuery --->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <!--- JQuery CDN 3.x ---> 
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+
+  <!--- Pygments Syntax Highlighting --->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pygments.css') }}">
+
+</head>
+<body>
+
+<!--- NAV BAR --->
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand navbar-brand-custom" href="{{ url_for('index') }}">Quote API</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link nav-link-custom" href="{{ url_for('docs') }}">Docs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link nav-link-custom" href="https://github.com/aliceseaborn/quote-api">GitHub</a>
+      </li>
+    </ul>
+  </div>
+    
+  </div>
+</nav>
+
+{% block content %}
+
+
+{% endblock %}
+
+</body>
+</html>

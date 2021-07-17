@@ -1,4 +1,15 @@
 Flask==1.1.2
+Flask-FlatPages==0.7.3
+Flask-Markdown==0.3
+Jinja2==3.0.1
+lib3to6==202101.1045
+Markdown==3.3.4
+markdown-katex==202106.1032
+MarkupSafe==2.0.1
+pathlib2==2.3.5
+Pygments==2.9.0
+PyYAML==5.4.1
+six==1.16.0
 requests==2.25.1
 lxml==4.6.3
 beautifulsoup4==4.9.3

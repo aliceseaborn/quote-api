@@ -1,0 +1,29 @@
+{# INDEX #}
+
+{% extends "base.html" %}
+{% block content %}
+
+<!--- CONTENT --->
+<div class="jumbotron" style="padding-top: 1rem;">
+
+	<div class="alert alert-danger" role="alert">
+		<b>WARNING:</b> This API represents the outcome of an academic project. The creators of this project do not assume liability for the use and/or abuse of this resource. There is no guarantee nor expectation of service. We do not provide guarantees of uptime, reliability, security, nor privacy for those who use this resource. Use of this tool constitutes an acceptance of liability.
+	</div>
+
+	<h3>Welcome</h3>
+	<hr>
+	<p>
+		This is a stock quote API. It provides free quotes for publically-traded American equities. It was created to aid in long-term financial research due to its focus on providing holistic data about the companies in question. For example, while many alternatives provide data on stock price, few low-prices commercial APIs provide datapoints for dividend dates, financial targets, etc. We provide these data for free by screen-scraping resources, compiling stock meta-data, and presenting them RESTfully to feed your research efforts.
+	</p>
+	<p>
+		Expensive and superior alternatives exist which provide near real-time data. If you are interested in feeding an automated trading algorithm, for instance, we strongly suggest you retain their services and leave us behind. This API is not designed for and should not be judged by its speed. On the other hand, if your research simply needs relevant data, this API might come in handy.
+	</p>
+	<p>
+		Browse the <a href="{{ url_for('docs') }}">docs</a> to learn about the support API versions and resources. If you have questions, you are free to open a ticket with our <a href="https://github.com/aliceseaborn/quote-api">GitHub</a> project and ask us.
+	</p>
+
+	<i>Be seeing you. Seaborn.</i>
+
+</div>
+
+{% endblock %}
