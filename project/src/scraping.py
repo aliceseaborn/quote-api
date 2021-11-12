@@ -21,7 +21,7 @@ def form_query(ticker):
     Takes a stock ticker as input and returns the full HTTP request
     for the yahoo finance query.
     """
-    return "https://in.finance.yahoo.com/quote/{}?ltr=1".format(ticker)
+    return f"https://finance.yahoo.com/quote/{ticker}"
 
 
 # ------------------------- READ HTML ------------------------- #
