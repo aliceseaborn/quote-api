@@ -21,5 +21,5 @@ This tutorial assumes that `[site]/` is the root endpoint. All APIs are located 
 | Request                    | Returns                                       |
 |----------------------------|-----------------------------------------------|
 | `/api/0/get?ticker=xyz`    | The server's current record for XYZ stock.    |
-| `/api/0/update?ticket=xyz` | Updates the record for XYZ stock.             |
-| `/api/0/create?ticket=xyz` | Updates and returns the record for XYZ stock. |
+| `/api/0/update?ticker=xyz` | Updates the record for XYZ stock.             |
+| `/api/0/create?ticker=xyz` | Updates and returns the record for XYZ stock. |
