@@ -105,7 +105,7 @@ def update(ticker):
     export_profile(profiles_path, profile, ticker)
 
     # # Return query results
-    return "{} Profile Updated Successfully.".format(ticker)
+    return f"{ticker} Profile Updated Successfully."
 
 
 @app.route('/api/0/get', methods=['GET'], defaults={'ticker': "AAPL"})

@@ -180,7 +180,7 @@ def export_profile(profiles_path, profile, ticker):
     """
     Exports a stock profile into the profiles folder as JSON.
     """
-    file = profiles_path / "{}.json".format(ticker)
+    file = profiles_path / f"{ticker}.json"
     with file.open("w") as fp:
         json.dump(profile, fp)
 
@@ -191,6 +191,6 @@ def import_profile(profiles_path, ticker):
     """
     Imports a stock profile from the profiles folder.
     """
-    file = profiles_path / "{}.json".format(ticker)
+    file = profiles_path / f"{ticker}.json"
     raw = open(file).read()
     return json.loads(raw)
