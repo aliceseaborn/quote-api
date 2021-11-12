@@ -2,9 +2,7 @@
 **.ipynb_checkpoints/
 
 # Python compiled
-*.pyc
-*/*.pyc
-*/*/*.pyc
+**.pyc
 
 # Cached stock profiles
 project/profiles/*
