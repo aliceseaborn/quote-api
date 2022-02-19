@@ -1,7 +1,7 @@
 # ------------------------- CONFIGURE ENVIRONMENT ------------------------- #
 
 import flask
-from flask import request, jsonify, render_template, send_from_directory
+from flask import request, jsonify, render_template
 
 from flask_flatpages import FlatPages, pygments_style_defs
 
@@ -10,23 +10,10 @@ FLATPAGES_AUTO_RELOAD = DEBUG
 FLATPAGES_EXTENSION = ".md"
 FLATPAGES_MARKDOWN_EXTENSIONS = ['codehilite', 'tables', 'markdown_katex', 'footnotes']
 
-import requests
-from bs4 import BeautifulSoup
-from lxml import html
-from urllib.request import Request, urlopen
-import urllib.request
-import urllib.parse
-import urllib.error
-import ssl
-import ast
-import os
-
-import json
-
 from pathlib import Path
 profiles_path = Path('profiles/')
 
-from src.scraping import *
+from src.scraping import form_query, request_webpage, parse_webpage, export_profile, import_profile
 
 
 # ------------------------------- FLASK API ------------------------------- #
