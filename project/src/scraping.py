@@ -67,89 +67,65 @@ def parse_webpage(webpage):
 
     # Creating a BeautifulSoup object of the HTML page for easy extraction of data.
     soup = BeautifulSoup(webpage, 'html.parser')
-    html = soup.prettify('utf-8')
     profile = {}
     trading = {}
     fundamentals = {}
-    
+
     # TRADING
-    
+
     # Previous Close
     for td in soup.findAll('td', attrs={'data-test': 'PREV_CLOSE-value'}):
-        for span in td.findAll('span', recursive=False):
-            trading['Previous Close'] = span.text.strip()
-    
+        trading['Previous Close'] = td.text.strip()
+
     # Open Value
     for td in soup.findAll('td', attrs={'data-test': 'OPEN-value'}):
-        for span in td.findAll('span', recursive=False):
-            trading['Open'] = span.text.strip()
+        trading['Open'] = td.text.strip()
 
-    # Present Value
-    for span in soup.findAll('span', attrs={'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}):
-        trading['Present Value'] = span.text.strip()
-            
     # Bid
     for td in soup.findAll('td', attrs={'data-test': 'BID-value'}):
-        for span in td.findAll('span', recursive=False):
-            trading['Bid'] = span.text.strip()
+        trading['Bid'] = td.text.strip()
 
     # Ask
     for td in soup.findAll('td', attrs={'data-test': 'ASK-value'}):
-        for span in td.findAll('span', recursive=False):
-            trading['Ask'] = span.text.strip()
-
-    # Present Growth
-    for div in soup.findAll('div', attrs={'class': 'D(ib) Va(t)'}):
-        for span in div.findAll('span', recursive=False):
-            profile['Present Growth'] = span.text.strip()
+        trading['Ask'] = td.text.strip()
 
     # Day's Range
     for td in soup.findAll('td', attrs={'data-test': 'DAYS_RANGE-value'}):
-        for span in td.findAll('span', recursive=False):
-            trading['Day Range'] = span.text.strip()
+        trading['Day Range'] = td.text.strip()
 
     # Fifty-two Week Range
     for td in soup.findAll('td', attrs={'data-test': 'FIFTY_TWO_WK_RANGE-value'}):
-        for span in td.findAll('span', recursive=False):
-            trading['Fifty-Two Week Range'] = span.text.strip()
+        trading['Fifty-Two Week Range'] = td.text.strip()
 
     # Trading Volume
     for td in soup.findAll('td', attrs={'data-test': 'TD_VOLUME-value'}):
-        for span in td.findAll('span', recursive=False):
-            trading['Day Volume'] = span.text.strip()
+        trading['Day Volume'] = td.text.strip()
 
     # Average 3M Volume
     for td in soup.findAll('td', attrs={'data-test': 'AVERAGE_VOLUME_3MONTH-value'}):
-        for span in td.findAll('span', recursive=False):
-            trading['Average 3M Volume'] = span.text.strip()
-            
+        trading['Average 3M Volume'] = td.text.strip()
+
     # FUNDAMENTALS
 
     # Market Capitalization
     for td in soup.findAll('td', attrs={'data-test': 'MARKET_CAP-value'}):
-        for span in td.findAll('span', recursive=False):
-            fundamentals['Market Capitalization'] = span.text.strip()
+        fundamentals['Market Capitalization'] = td.text.strip()
 
     # Beta 3Y
     for td in soup.findAll('td', attrs={'data-test': 'BETA_3Y-value'}):
-        for span in td.findAll('span', recursive=False):
-            fundamentals['Beta 3Y'] = span.text.strip()
+        fundamentals['Beta 3Y'] = td.text.strip()
 
     # PE Ratio
     for td in soup.findAll('td', attrs={'data-test': 'PE_RATIO-value'}):
-        for span in td.findAll('span', recursive=False):
-            fundamentals['PE Ratio'] = span.text.strip()
+        fundamentals['PE Ratio'] = td.text.strip()
 
     # EPS Ratio
     for td in soup.findAll('td', attrs={'data-test': 'EPS_RATIO-value'}):
-        for span in td.findAll('span', recursive=False):
-            fundamentals['EPS Ratio'] = span.text.strip()
+        fundamentals['EPS Ratio'] = td.text.strip()
 
     # Earnings Date
     for td in soup.findAll('td', attrs={'data-test': 'EARNINGS_DATE-value'}):
-        trading['Earnings Date'] = []
-        for span in td.findAll('span', recursive=False):
-            fundamentals['Earnings Date'] = span.text.strip()
+        fundamentals['Earnings Date'] = td.text.strip()
 
     # Dividend and Yield
     for td in soup.findAll('td', attrs={'data-test': 'DIVIDEND_AND_YIELD-value'}):
@@ -158,19 +134,17 @@ def parse_webpage(webpage):
 
     # Ex Dividend Date
     for td in soup.findAll('td', attrs={'data-test': 'EX_DIVIDEND_DATE-value'}):
-        for span in td.findAll('span', recursive=False):
-            fundamentals['Ex Dividend Rate'] = span.text.strip()
+        fundamentals['Ex Dividend Rate'] = td.text.strip()
 
     # One Year Target Price
     for td in soup.findAll('td', attrs={'data-test': 'ONE_YEAR_TARGET_PRICE-value'}):
-        for span in td.findAll('span', recursive=False):
-            fundamentals['One Year Target Price'] = span.text.strip()
+        fundamentals['One Year Target Price'] = td.text.strip()
 
     # Other Details
     profile['Trading'] = trading
     profile['Fundamental'] = fundamentals
-    
-    # Return full profile
+
+    # Other Details
     return profile
 
 
