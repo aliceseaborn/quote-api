@@ -1,4 +1,4 @@
-Flask==1.1.2
+Flask==2.3.2
 Flask-FlatPages==0.7.3
 Flask-Markdown==0.3
 Jinja2==3.0.1
